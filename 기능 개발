@@ -1,0 +1,36 @@
+#include <string>
+#include <vector>
+#include <queue>
+
+using namespace std;
+
+vector<int> solution(vector<int> progresses, vector<int> speeds) {
+    vector<int> answer;
+    queue<int> pr;
+    queue<int> sp;
+    
+    int n = progresses.size();
+    int j = 0;
+    int day = 1;
+    
+    for(int i = 0; i < n; i++){ // queue에 배열 삽입
+        pr.push(progresses[i]);
+        sp.push(speeds[i]);
+    }
+    
+    while(!pr.empty()){
+        if(pr.front() + sp.front() * day >= 100){ // 계산했을 때 100퍼센트가 넘는다면 pop()
+            pr.pop();
+            sp.pop();
+            j++;
+            continue;
+        }
+        if(j > 0) answer.push_back(j); // 계산 결과가 0 이상일 경우 j값을 push.
+        else day++; // day 증가.
+        j = 0;
+    }
+    
+    answer.push_back(j);
+    
+    return answer;
+}
