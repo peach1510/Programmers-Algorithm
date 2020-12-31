@@ -1,0 +1,30 @@
+#include <string>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+bool compare(string &a, string &b){
+    if(a+b > b+a) return true;
+    return false;
+}
+
+string solution(vector<int> numbers) {
+    string answer = "";
+    vector<string> str;
+    int n = numbers.size();
+    
+    for(int i = 0; i < n; i++){ // int를 str로 변환
+        str.push_back(to_string(numbers[i]));
+    }
+    
+    sort(str.begin(), str.end(), compare); // str을 순서대로 정렬
+    
+    for(int i = 0; i < n; i++) {
+        answer += str[i];
+    }
+    
+    if (str[0] == "0") return "0";
+    
+    return answer;
+}
