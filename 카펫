@@ -1,0 +1,25 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+vector<int> solution(int brown, int yellow) {
+    vector<int> answer;
+    int sum = brown + yellow;
+    int hor, ver;
+        
+    for(int i = 3;i < sum; i++){ // 모든 brown + yellow의 타일 수로 만들 수 있는 직사각형.
+        if(sum % i == 0){
+            hor = sum / i;
+            ver = i;
+            
+            if((hor * 2) + (ver * 2) - 4 == brown) { // 직사각형일 경우 brown과 yellow의 개수 일치 여부 확인.
+                answer.push_back(hor);
+                answer.push_back(ver);
+                break;
+            }
+        }
+    }
+    
+    return answer;
+}
