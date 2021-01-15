@@ -1,0 +1,27 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+int answer = 0;
+
+void dfs(vector<int> numbers, int target, int sum, int count) {
+    if(numbers.size() == count){ // count 수와 number vector의 size가 동일하면 값을 return
+        if(sum == target) {
+            answer++;
+        }
+        return;
+    }
+    
+    dfs(numbers, target, sum + numbers[count], count + 1); // 모든 경우의 수를 dfs recursive로 탐색
+    dfs(numbers, target, sum - numbers[count], count + 1);
+}
+
+int solution(vector<int> numbers, int target) {
+    int sum = 0;
+    int count = 0;
+    
+    dfs(numbers, target, sum, count);
+    
+    return answer;
+}
